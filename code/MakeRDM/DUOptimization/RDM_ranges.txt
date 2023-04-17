@@ -1,0 +1,14 @@
+Demand_1 -.25 2.25
+Demand_2 -.25 2.25
+Demand_3 -.25 2.25
+Demand_4 -.25 2.25
+Bond_term  0.8 1.2 
+Bond_interest  0.6 1.2
+Discount  0.6 1.4 
+res  0.8 1.2
+Evap  0.9 1.1
+JLWTP_Permit 0.75 1.5
+JLWTP_Constr 1.0 1.2
+str_A  0.0  0.01
+str_T  4172.3 4589.89
+str_p  417 459 
