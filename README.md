@@ -25,31 +25,32 @@ All code can be found in the code directory. Results can be found in the results
 ### Generating synthetic streamflows
 Steps for generating streamflows:
 
-1. Navigate to the "Make_RDMs" directory
+1. Navigate to the `Make_RDMs/` directory
 2. Use historical generator to generate 1000 synthetically generated streamflows
-    a. run “submit_single_generation_set.sh”, this calls the matlab (octave) scritp “generate_streamflows.m” whihc in turn calls a script called “generate_sample.m” which uses the “stress_dynamic.m” script to create streamflow realizations (”stress_dynamic.m” reads in “RDM_LHS_inflows.csv” which has the sinusoidal parameters sampled from values in Trindade et al., 2020)
-3. Combine historical record with the generated streamflows. This is done with “JLWTPModel_combineHistoricalSyntheticInflows.R” in the “optimizationRDM” folder. The script prints new inflow files to the “final_synthetic_inflows” folder
+   - Run `submit_single_generation_set.sh`, this calls the matlab (octave) script `generate_streamflows.m` which in turn calls a script called `generate_sample.m` which uses the `stress_dynamic.m` script to create streamflow realizations
+   - `stress_dynamic.m` reads in `RDM_LHS_inflows.csv` which has the sinusoidal parameters sampled from values in Trindade et al. (2020)
+3. Combine historical record with the generated streamflows. This is done with `JLWTPModel_combineHistoricalSyntheticInflows.R` in the `optimizationRDM/` folder. The script prints new inflow files to the `final_synthetic_inflows/` folder
 
 ### Generating synthetic demand records
 Demand generation overall has the following steps:
 
 1. generate an RDM sample with full set of DU factors
-2. add demand multiplier factors demand_rdm_op.csv and transpose (4x1000matrix)
-3. run pwl_demands.py 
-4. run JLWTPModel_buildAnnualDemandProjections_avgMGDs.R to get the correlation structure with the inflows
-5. run JLWTPModel_add_pwl_trends.R on Hopper and it will generate the final demand files (stored in synthetic_demands_pwl, which needs to be created first).
+2. add demand multiplier factors `demand_rdm_op.csv` and transpose (4x1000matrix)
+3. Run `pwl_demands.py`
+4. Run `JLWTPModel_buildAnnualDemandProjections_avgMGDs.R` to get the correlation structure with the inflows
+5. Run `JLWTPModel_add_pwl_trends.R` on Hopper and it will generate the final demand files (stored in `synthetic_demands_pwl/`, which needs to be created first).
 
 ## DU Optimization
 1. Navigate to Code/Optimization
 2. Download the Borg MOEA (must request access) from http://borgmoea.org/. To replicate the full experiment, a parallel version of the algorithm is required
-3. Compile Waterpaths using "make gcc"
-4. Construct ROF tables using the "Make_tables.sh" script
-5. recompile WaterPaths using "make borg"
+3. Compile Waterpaths using `make gcc`
+4. Construct ROF tables using the `Make_tables.sh` script
+5. recompile WaterPaths using `make borg`
 6. Run the optimization across 150k NFE
 
 ## Create SOWs for DU re-evaluation
 1. create folders for each of the 2,000 streamflow samples
-    a. use the make_input_folders.sh script, may need adjusting. Each RDM factor needs its own folder. All RDM folders are in a subfolder called "RDM_inflows_demands". Each RDM folder has the following structure:
+    a. Use the `make_input_folders.sh` script, may need adjusting. Each RDM factor needs its own folder. All RDM folders are in a subfolder called "RDM_inflows_demands". Each RDM folder has the following structure:
         i. final_synthetic_inflows
             - evaporation
         ii. inflow_demand_distributions
