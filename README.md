@@ -27,7 +27,7 @@ Steps for generating streamflows:
 
 1. Navigate to the `Make_RDMs/` directory
 2. Use historical generator to generate 1000 synthetically generated streamflows
-   - Run `submit_single_generation_set.sh`, this calls the matlab (octave) script `generate_streamflows.m` which in turn calls a script called `generate_sample.m` which uses the `stress_dynamic.m` script to create streamflow realizations
+   - Run `submit_single_generation_set.sh`, this calls the MATLAB script `generate_streamflows.m` which in turn calls a script called `generate_sample.m` which uses the `stress_dynamic.m` script to create streamflow realizations
    - `stress_dynamic.m` reads in `RDM_LHS_inflows.csv` which has the sinusoidal parameters sampled from values in Trindade et al. (2020)
 3. Combine historical record with the generated streamflows. This is done with `JLWTPModel_combineHistoricalSyntheticInflows.R` in the `optimizationRDM/` folder. The script prints new inflow files to the `final_synthetic_inflows/` folder
 
